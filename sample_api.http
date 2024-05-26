@@ -1,0 +1,52 @@
+## Create Account
+POST http://127.0.0.1:8000/api/accounts/
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
+    "account_name": "Test Account",
+    "website": "http://example.com"
+}
+
+### Create Destination
+POST http://127.0.0.1:8000/api/destinations/
+Content-Type: application/json
+
+{
+    "account": "c2dcd2b8-894b-4a3a-ae69-5b902c9292a8",
+    "url": "http://webhook.site/your-webhook-url",
+    "http_method": "POST",
+    "headers": {
+        "APP_ID": "1234APPID1234",
+        "APP_SECRET": "enwdj3bshwer43bjhjs9ereuinkjcnsiurew8s",
+        "ACTION": "user.update",
+        "Content-Type": "application/json",
+        "Accept": "*"
+    }
+}
+
+### Get Destinations for an Account
+GET http://127.0.0.1:8000/api/account/c2dcd2b8-894b-4a3a-ae69-5b902c9292a8/destinations/
+
+### Send Incoming Data
+POST http://127.0.0.1:8000/api/server/incoming_data/
+Content-Type: application/json
+CL-X-TOKEN: c59d64534c9e41a5b4f3d3e56d9e2873
+
+{
+    "user_id": 123,
+    "action": "update",
+    "details": "Some details about the update"
+}
+
+
+PUT http://127.0.0.1:8000/api/accounts/c2dcd2b8-894b-4a3a-ae69-5b902c9292a8/
+Content-Type: application/json
+
+{
+    "email": "user@example.com",
+    "account_name": "Updated Test Account",
+    "website": "http://updated-example.com"
+}
+
+DELETE http://127.0.0.1:8000/api/accounts/c2dcd2b8-894b-4a3a-ae69-5b902c9292a8/
