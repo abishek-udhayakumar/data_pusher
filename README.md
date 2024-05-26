@@ -4,26 +4,97 @@
 
 The Data Pusher is a Django web application designed to receive data from an account and distribute it to multiple destinations using webhook URLs. This project demonstrates how to create a Django REST API with modules for managing accounts and destinations, handling JSON data, and sending it to specified endpoints.
 
-## Project Structure
 
-data_pusher_project/
-│
-├── data_pusher/ # Django project directory
-│ ├── init.py
-│ ├── settings.py # Django settings file
-│ ├── urls.py # URL configuration file
-│ └── wsgi.py # WSGI application file
-│
-└── core/ # Django app directory
-├── migrations/ # Database migrations
-├── init.py
-├── admin.py # Admin configuration
-├── apps.py # App configuration
-├── models.py # Database models (Account, Destination)
-├── serializers.py # Serializers for models
-├── tests.py # Test cases
-├── urls.py # URL configuration for the app
-└── views.py # Views and ViewSets
+### Detailed Project Structure
+
+1. **data_pusher_project/**: Root directory of the project.
+2. **data_pusher/**: Django project directory.
+   - **__init__.py**: Initializes the Django project.
+   - **settings.py**: Contains the settings and configurations for the Django project.
+   - **urls.py**: Defines the URL routing for the project.
+   - **wsgi.py**: Entry-point for WSGI-compatible web servers to serve your project.
+3. **core/**: Django app directory.
+   - **migrations/**: Directory for database migration files.
+     - **__init__.py**: Initializes the migrations directory.
+   - **__init__.py**: Initializes the core app.
+   - **admin.py**: Configuration for the Django admin interface.
+   - **apps.py**: Configuration for the core app.
+   - **models.py**: Defines the database models for Account and Destination.
+   - **serializers.py**: Defines serializers for the models.
+   - **tests.py**: Contains the test cases for the app.
+   - **urls.py**: Defines the URL routing for the core app.
+   - **views.py**: Contains the views and viewsets for handling requests.
+
+## Features
+
+- **Account Management**: Create, retrieve, update, and delete accounts. Each account has a unique email, account ID, and app secret token.
+- **Destination Management**: Create, retrieve, update, and delete destinations for each account. Destinations include URL, HTTP method, and headers.
+- **Data Handling**: Receive JSON data via a POST request and forward it to the specified destinations based on the account's secret token.
+- **RESTful APIs**: CRUD operations for accounts and destinations, endpoint to receive data and forward it to destinations.
+
+## Installation and Setup
+
+1. **Clone the repository:**
+
+    ```bash
+    git clone https://github.com/yourusername/data_pusher.git
+    cd data_pusher
+    ```
+
+2. **Create a virtual environment and activate it:**
+
+    ```bash
+    python3 -m venv venv
+    source venv/bin/activate  # On Windows use `venv\Scripts\activate`
+    ```
+
+3. **Install the required dependencies:**
+
+    ```bash
+    pip install -r requirements.txt
+    ```
+
+4. **Apply migrations:**
+
+    ```bash
+    python manage.py makemigrations
+    python manage.py migrate
+    ```
+
+5. **Run the development server:**
+
+    ```bash
+    python manage.py runserver
+    ```
+
+## API Endpoints
+
+### Account Management
+
+- **Create Account**: `POST /api/accounts/`
+- **Retrieve Account**: `GET /api/accounts/{id}/`
+- **Update Account**: `PUT /api/accounts/{id}/`
+- **Delete Account**: `DELETE /api/accounts/{id}/`
+
+### Destination Management
+
+- **Create Destination**: `POST /api/destinations/`
+- **Retrieve Destination**: `GET /api/destinations/{id}/`
+- **Update Destination**: `PUT /api/destinations/{id}/`
+- **Delete Destination**: `DELETE /api/destinations/{id}/`
+- **Get Destinations for Account**: `GET /api/account/{account_id}/destinations/`
+
+### Data Handling
+
+- **Receive Data**: `POST /api/server/incoming_data/`
+
+## Contributing
+
+If you'd like to contribute, please fork the repository and use a feature branch. Pull requests are welcome.
+
+## License
+
+This project is open source and available under the [MIT License](LICENSE).
 
 
 ## Features
